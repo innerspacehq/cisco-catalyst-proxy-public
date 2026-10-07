@@ -1,0 +1,39 @@
+# Production configuration.
+# Copy and adjust for your environment, or override these values by
+# passing a different --config file to proxy_main.py.
+#
+# Required environment variables:
+#   HMAC_SECRET          stable hex-encoded secret, min 64 chars (32 bytes)
+#   INNERSPACE_ENDPOINT  host:port of the InnerSpace gRPC service
+#   LOG_LEVEL            optional, defaults to INFO
+
+proxy:
+  host: "[::]"
+  port: 57000
+  max_concurrent_streams: 10
+  # Enable TLS on the WLC-facing listener only when the WLC is configured to use
+  # a trustpoint for this proxy endpoint. When false, no cert/key or /certs mount
+  # is required. When true, mount the customer-provided proxy server
+  # certificate/key into the container at these paths, or override them.
+  use_tls: false
+  tls_cert: "/certs/server.cert"
+  tls_key: "/certs/server.key"
+
+innerspace:
+  # InnerSpace's ingest endpoint uses a publicly trusted certificate, so TLS
+  # validation uses the system default trust store. No custom CA file is needed.
+  use_tls: true
+
+app:
+  log_level: "INFO"
+
+# AP Filtering Configuration (ANY logic)
+# Replace the example MACs below with your deployment's real AP inventory
+# (base radio MAC / wtp-mac per AP, not the Ethernet MAC).
+ap_filtering:
+  enabled: true
+  allow_list:
+    # Example AP MACs format:
+    - "aa:bb:cc:dd:ee:ff"  # example — replace with a real AP MAC
+    # - "11:22:33:44:55:66"  # example — replace with a real AP MAC
+    # - "00:11:22:33:44:55"  # example — replace with a real AP MAC

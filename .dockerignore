@@ -1,0 +1,15 @@
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+tests/
+.git/
+.gitignore
+ssl/*.cert
+ssl/*.key
+ssl/*.csr
+ssl/*.srl
+README.md
+TESTING.md
+CLAUDE.md

@@ -1,0 +1,473 @@
+{
+  "description": "Synthetic examples of telemetry after this proxy hashes MAC addresses and before it forwards the messages to InnerSpace. The OUI remains plaintext and the device-specific NIC bytes are replaced by an HMAC-SHA256 digest.",
+  "basedOn": "cisco-wlc-telemetry-schema.json exampleMessage entries",
+  "demoHmacSecret": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "note": "This demo secret is public and must not be used in production. The proxy hex-decodes HMAC_SECRET to raw bytes before hashing (see config.py), so these digests are reproducible only with that same hex-decoding. Production output depends on the deployment HMAC_SECRET.",
+  "macHashing": {
+    "inputExample": "aa:bb:cc:11:22:33",
+    "outputExample": "aa:bb:cc:e7c7d3d170503d423d6323bf856c75ea7fad696f5aa846bddb50baea61a13824",
+    "format": "<oui-byte-1>:<oui-byte-2>:<oui-byte-3>:<64-character-hmac-sha256>"
+  },
+  "messageCount": 5,
+  "messages": [
+    {
+      "sampleSource": "Per-client statistics",
+      "nodeIdStr": "wlc-001",
+      "subscriptionIdStr": "15075",
+      "encodingPath": "Cisco-IOS-XE-wireless-client-oper:client-oper-data/traffic-stats",
+      "collectionId": "76",
+      "collectionStartTime": "1751994142000",
+      "msgTimestamp": "1751994143000",
+      "collectionEndTime": "1751994143000",
+      "dataGpbkv": [
+        {
+          "timestamp": "1751994143000",
+          "fields": [
+            {
+              "name": "keys",
+              "fields": [
+                {
+                  "name": "ms-mac-address",
+                  "stringValue": "aa:bb:cc:e7c7d3d170503d423d6323bf856c75ea7fad696f5aa846bddb50baea61a13824"
+                }
+              ]
+            },
+            {
+              "name": "content",
+              "fields": [
+                {
+                  "name": "bytes-rx",
+                  "uint64Value": 12345678
+                },
+                {
+                  "name": "bytes-tx",
+                  "uint64Value": 87654321
+                },
+                {
+                  "name": "pkts-rx",
+                  "uint64Value": 45000
+                },
+                {
+                  "name": "pkts-tx",
+                  "uint64Value": 39000
+                },
+                {
+                  "name": "data-retries",
+                  "uint64Value": 800
+                },
+                {
+                  "name": "tx-retries",
+                  "uint64Value": 1200
+                },
+                {
+                  "name": "most-recent-rssi",
+                  "sint32Value": -55
+                },
+                {
+                  "name": "most-recent-snr",
+                  "uint32Value": 34
+                },
+                {
+                  "name": "speed",
+                  "uint32Value": 866
+                },
+                {
+                  "name": "spatial-stream",
+                  "uint32Value": 2
+                },
+                {
+                  "name": "current-rate",
+                  "stringValue": "866.7"
+                },
+                {
+                  "name": "power-save-state",
+                  "uint32Value": 0
+                },
+                {
+                  "name": "client-active",
+                  "boolValue": true
+                },
+                {
+                  "name": "glan-stats-update-timestamp",
+                  "stringValue": "2026-07-10T16:44:07.000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sampleSource": "AP RRM RF neighbors",
+      "nodeIdStr": "wlc-001",
+      "subscriptionIdStr": "15076",
+      "encodingPath": "Cisco-IOS-XE-wireless-rrm-oper:rrm-oper-data/ap-auto-rf-dot11-data",
+      "collectionId": "77",
+      "collectionStartTime": "1751994143000",
+      "msgTimestamp": "1751994144000",
+      "collectionEndTime": "1751994144000",
+      "dataGpbkv": [
+        {
+          "timestamp": "1751994144000",
+          "fields": [
+            {
+              "name": "keys",
+              "fields": [
+                {
+                  "name": "wtp-mac",
+                  "stringValue": "70:70:8b:465766d61338bb3f80b611eb742d2d95e13f8ff18a964232784149961b2b93ad"
+                },
+                {
+                  "name": "radio-slot-id",
+                  "uint32Value": 1
+                }
+              ]
+            },
+            {
+              "name": "content",
+              "fields": [
+                {
+                  "name": "neighbor-radio-info",
+                  "fields": [
+                    {
+                      "name": "neighbor-radio-list",
+                      "fields": [
+                        {
+                          "name": "neighbor-radio-info",
+                          "fields": [
+                            {
+                              "name": "neighbor-radio-mac",
+                              "stringValue": "90:0a:1a:f90387ab9aacfb17192f9a1c5ab3545b93fe864633664dd2e178f925d5fde824"
+                            },
+                            {
+                              "name": "neighbor-radio-slot-id",
+                              "uint32Value": 1
+                            },
+                            {
+                              "name": "rssi",
+                              "sint32Value": -63
+                            },
+                            {
+                              "name": "snr",
+                              "sint32Value": 25
+                            },
+                            {
+                              "name": "channel",
+                              "uint32Value": 149
+                            },
+                            {
+                              "name": "power",
+                              "uint32Value": 17
+                            },
+                            {
+                              "name": "group-leader-ip",
+                              "stringValue": "10.0.0.1"
+                            },
+                            {
+                              "name": "chan-width",
+                              "stringValue": "radio-neighbor-chan-width-160-mhz"
+                            },
+                            {
+                              "name": "sensor-covered",
+                              "boolValue": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sampleSource": "Rogue clients",
+      "nodeIdStr": "wlc-001",
+      "subscriptionIdStr": "15077",
+      "encodingPath": "Cisco-IOS-XE-wireless-rogue-oper:rogue-oper-data/rogue-client-data",
+      "collectionId": "78",
+      "collectionStartTime": "1751994144000",
+      "msgTimestamp": "1751994145000",
+      "collectionEndTime": "1751994145000",
+      "dataGpbkv": [
+        {
+          "timestamp": "1751994145000",
+          "fields": [
+            {
+              "name": "keys",
+              "fields": [
+                {
+                  "name": "rogue-client-address",
+                  "stringValue": "f0:1d:2d:a42fcecd470acabc570b40d73cd187f730eeb10d30217ff04b988b8ce83440bb"
+                }
+              ]
+            },
+            {
+              "name": "content",
+              "fields": [
+                {
+                  "name": "rogue-client-bssid",
+                  "stringValue": "90:0a:1a:f90387ab9aacfb17192f9a1c5ab3545b93fe864633664dd2e178f925d5fde824"
+                },
+                {
+                  "name": "rogue-client-gateway",
+                  "stringValue": "90:0a:1a:3b020e482ecdf3973b38e67a97bc918d12414f5820885d3f85e3525d52e6f829"
+                },
+                {
+                  "name": "rogue-client-state",
+                  "stringValue": "alert"
+                },
+                {
+                  "name": "rogue-client-containment-level",
+                  "uint32Value": 0
+                },
+                {
+                  "name": "contained",
+                  "boolValue": false
+                },
+                {
+                  "name": "rogue-client-ipv4-addr",
+                  "stringValue": "10.20.30.40"
+                },
+                {
+                  "name": "n-lrads",
+                  "uint32Value": 1
+                },
+                {
+                  "name": "rogue-client-first-timestamp",
+                  "stringValue": "2026-06-26T16:44:07.956826+00:00"
+                },
+                {
+                  "name": "rogue-client-last-timestamp",
+                  "stringValue": "2026-06-26T16:44:07.956826+00:00"
+                },
+                {
+                  "name": "rogue-client-lrad",
+                  "fields": [
+                    {
+                      "name": "lrad-mac-addr",
+                      "stringValue": "70:70:8b:465766d61338bb3f80b611eb742d2d95e13f8ff18a964232784149961b2b93ad"
+                    },
+                    {
+                      "name": "slot-id",
+                      "uint32Value": 0
+                    },
+                    {
+                      "name": "channel",
+                      "uint32Value": 11
+                    },
+                    {
+                      "name": "rssi",
+                      "fields": [
+                        {
+                          "name": "val",
+                          "sint32Value": -71
+                        }
+                      ]
+                    },
+                    {
+                      "name": "last-heard",
+                      "stringValue": "2026-06-26T16:44:07.956826+00:00"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sampleSource": "Rogue access points",
+      "nodeIdStr": "wlc-001",
+      "subscriptionIdStr": "15078",
+      "encodingPath": "Cisco-IOS-XE-wireless-rogue-oper:rogue-oper-data/rogue-data",
+      "collectionId": "79",
+      "collectionStartTime": "1751994145000",
+      "msgTimestamp": "1751994146000",
+      "collectionEndTime": "1751994146000",
+      "dataGpbkv": [
+        {
+          "timestamp": "1751994146000",
+          "fields": [
+            {
+              "name": "keys",
+              "fields": [
+                {
+                  "name": "rogue-address",
+                  "stringValue": "aa:bb:cc:d8b0f950d233ad7ea68daf944b097250f828dc7ab1507f839fe4e063956ca582"
+                }
+              ]
+            },
+            {
+              "name": "content",
+              "fields": [
+                {
+                  "name": "rogue-class-type",
+                  "stringValue": "malicious"
+                },
+                {
+                  "name": "rogue-mode",
+                  "stringValue": "contained"
+                },
+                {
+                  "name": "rogue-containment-level",
+                  "uint32Value": 1
+                },
+                {
+                  "name": "contained",
+                  "boolValue": true
+                },
+                {
+                  "name": "severity-score",
+                  "uint32Value": 80
+                },
+                {
+                  "name": "rogue-is-on-my-network",
+                  "boolValue": false
+                },
+                {
+                  "name": "ad-hoc",
+                  "boolValue": false
+                },
+                {
+                  "name": "max-detected-rssi",
+                  "sint32Value": -58
+                },
+                {
+                  "name": "channel-max-rssi",
+                  "uint32Value": 6
+                },
+                {
+                  "name": "snr-max-rssi",
+                  "sint32Value": 22
+                },
+                {
+                  "name": "ssid-max-rssi",
+                  "stringValue": "rogue-ssid"
+                },
+                {
+                  "name": "ap-name-max-rssi",
+                  "stringValue": "ap-floor2-12"
+                },
+                {
+                  "name": "lrad-mac-max-rssi",
+                  "stringValue": "70:70:8b:465766d61338bb3f80b611eb742d2d95e13f8ff18a964232784149961b2b93ad"
+                },
+                {
+                  "name": "last-channel",
+                  "uint32Value": 6
+                },
+                {
+                  "name": "last-heard-ssid",
+                  "stringValue": "rogue-ssid"
+                },
+                {
+                  "name": "n-lrads",
+                  "uint32Value": 1
+                },
+                {
+                  "name": "n-clients",
+                  "uint32Value": 0
+                },
+                {
+                  "name": "rogue-first-timestamp",
+                  "stringValue": "2026-06-26T16:40:00Z"
+                },
+                {
+                  "name": "rogue-last-timestamp",
+                  "stringValue": "2026-06-26T16:44:07Z"
+                },
+                {
+                  "name": "last-heard-lrad-key",
+                  "fields": [
+                    {
+                      "name": "lrad-mac-addr",
+                      "stringValue": "70:70:8b:465766d61338bb3f80b611eb742d2d95e13f8ff18a964232784149961b2b93ad"
+                    },
+                    {
+                      "name": "slot-id",
+                      "uint32Value": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sampleSource": "Location RSSI measurements",
+      "nodeIdStr": "wlc-001",
+      "subscriptionIdStr": "15079",
+      "encodingPath": "Cisco-IOS-XE-wireless-location-oper:location-oper-data/location-rssi-measurements",
+      "collectionId": "80",
+      "collectionStartTime": "1751994146000",
+      "msgTimestamp": "1751994147000",
+      "collectionEndTime": "1751994147000",
+      "dataGpbkv": [
+        {
+          "timestamp": "1751994147000",
+          "fields": [
+            {
+              "name": "keys",
+              "fields": [
+                {
+                  "name": "client-mac-addr",
+                  "stringValue": "aa:bb:cc:e7c7d3d170503d423d6323bf856c75ea7fad696f5aa846bddb50baea61a13824"
+                },
+                {
+                  "name": "lrad-addr",
+                  "stringValue": "70:70:8b:465766d61338bb3f80b611eb742d2d95e13f8ff18a964232784149961b2b93ad"
+                }
+              ]
+            },
+            {
+              "name": "content",
+              "fields": [
+                {
+                  "name": "radio-measurements",
+                  "fields": [
+                    {
+                      "name": "band",
+                      "stringValue": "dot11-80211a"
+                    },
+                    {
+                      "name": "type",
+                      "stringValue": "location-rssi-source-probe"
+                    },
+                    {
+                      "name": "snr",
+                      "sint32Value": 30
+                    },
+                    {
+                      "name": "sample",
+                      "fields": [
+                        {
+                          "name": "rssi-value-a",
+                          "sint32Value": -55
+                        },
+                        {
+                          "name": "rssi-value-b",
+                          "sint32Value": -57
+                        },
+                        {
+                          "name": "rssi-timestamp",
+                          "stringValue": "2026-07-10T16:44:07Z"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

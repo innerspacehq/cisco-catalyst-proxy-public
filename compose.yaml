@@ -1,0 +1,22 @@
+# Example Compose file for the Cisco Catalyst MAC Hashing Proxy.
+# Create proxy.env (see the README "Running As A Service" section) before starting.
+# Works with both `podman compose` and `docker compose`.
+services:
+  cisco-catalyst-proxy:
+    image: cisco-catalyst-proxy
+    build: .
+    container_name: cisco-catalyst-proxy
+    restart: unless-stopped
+    ports:
+      - "57000:57000"
+    env_file:
+      - proxy.env
+    # Optional WLC-facing TLS: supply a TLS config and mount the certs. On
+    # SELinux hosts (RHEL) :Z relabels the mounts. Under rootless Podman the
+    # container runs as a non-root user, so the files must be readable by it:
+    # podman compose accepts an extra ,U (e.g. :ro,Z,U) to remap ownership;
+    # docker compose does not, so grant read access another way.
+    # command: ["--config", "configs/production-tls.yml"]
+    # volumes:
+    #   - ./certs:/certs:ro,Z
+    #   - ./production-tls.yml:/app/configs/production-tls.yml:ro,Z

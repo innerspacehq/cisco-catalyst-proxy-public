@@ -1,0 +1,10 @@
+Copyright (c) InnerSpace.
+All rights reserved.
+
+This license applies only to source code and documentation authored by
+InnerSpace in this repository.
+
+Some protobuf schemas and generated protobuf bindings under proto/ are derived
+from Cisco Systems, Inc. materials licensed under the Apache License, Version
+2.0. Those files are redistributed under their original license. See
+LICENSE-APACHE-2.0.txt and THIRD_PARTY_NOTICES.md.

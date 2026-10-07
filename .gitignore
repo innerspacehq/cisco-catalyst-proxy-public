@@ -1,0 +1,32 @@
+# Python virtual environment
+venv/
+.venv/
+
+# Compiled Python bytecode
+__pycache__/
+*.py[cod]
+
+# Packaging / build artifacts
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# Environment / secrets
+.env
+proxy.env
+
+# Generated TLS material (see ssl/gencert.sh)
+ssl/*.cert
+ssl/*.key
+ssl/*.csr
+ssl/*.srl
+
+# Logs
+*.log
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
